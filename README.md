@@ -158,7 +158,8 @@ db.pool.size=10
 queue.max_retries=3
 queue.backoff_base=2
 queue.lease_seconds=60
-Explanation:
+```
+## Explanation:
 
 db.url — JDBC URL to connect to your MySQL database.
 
@@ -176,8 +177,7 @@ queue.lease_seconds — Duration (in seconds) for which a worker holds a job lea
 If you’re deploying or testing on Aiven Cloud MySQL, SSL and certificate verification are required.
 Replace placeholder values accordingly:
 
-properties
-Copy code
+
 # =========================
 # Aiven Cloud Database Configuration
 # =========================
@@ -186,12 +186,9 @@ db.user=avnadmin
 db.password=yourpassword
 db.pool.size=10
 
-Notes:
+## Notes:
 
 Use ssl-mode=VERIFY_CA to enforce secure SSL verification.
-
 Replace the CA certificate path (ssl-ca=...) with the actual path on your system.
-
 The same queue configuration from the local setup can be used here.
-
 Ensure you don’t disable SSL verification in production for security reasons.
