@@ -8,7 +8,7 @@
 6. [Configuration (application.properties)](#configuration-applicationproperties)
 7. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
 8. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
-9. [Tests & Verification Steps](#tests--verification-steps-to-run-before-submission)
+9. [Tests & Verification Steps](#tests--verification-steps)
 
 
 ## Quick Summary & Status
