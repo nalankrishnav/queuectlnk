@@ -126,7 +126,7 @@ com.mysql:mysql-connector-j:8.0.33
 info.picocli:picocli:4.7.5  
 
 ---
-
+```
 ## Configuration (`application.properties`)
 
 This section defines the configuration file required by **queuectl** for both local and cloud database connections.  
@@ -134,8 +134,6 @@ All properties are placed in:
 
 src/main/resources/application.properties
 
-yaml
-Copy code
 
 ---
 
