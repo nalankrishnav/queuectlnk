@@ -194,6 +194,8 @@ Replace the CA certificate path (ssl-ca=...) with the actual path on your system
 The same queue configuration from the local setup can be used here.
 Ensure you don’t disable SSL verification in production for security reasons.
 
+---
+
 ### Build (single runnable JAR) & run (examples)
 # Build
 From project root:
