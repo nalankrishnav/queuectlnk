@@ -35,9 +35,25 @@ public class DatabaseUtil {
             cfg.setPoolName("queuectl-pool");
 
             ds = new HikariDataSource(cfg);
+
+            // --- DEBUG: print the actual DB/catalog and user this app connected to ---
+            try (java.sql.Connection c = ds.getConnection();
+                 java.sql.PreparedStatement ps = c.prepareStatement("SELECT DATABASE() AS db, USER() AS user, @@session.time_zone AS tz");
+                 java.sql.ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("DEBUG: app connected to DB=" + rs.getString("db")
+                            + " as user=" + rs.getString("user")
+                            + " tz=" + rs.getString("tz"));
+                }
+            } catch (Exception ex) {
+                System.err.println("DEBUG: failed to query DB info: " + ex.getMessage());
+                // don't throw — debug should not break startup
+            }
+            // --- end debug ---
         }
         return ds;
     }
+
 
     public static synchronized void close() {
         if (ds != null) {
