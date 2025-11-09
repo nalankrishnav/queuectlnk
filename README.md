@@ -74,3 +74,124 @@ The project uses an `application.properties` file for **DB and queue configurati
 
 ---
 
+
+## Schema (SQL) — Copy/Paste Ready
+
+```sql
+CREATE TABLE IF NOT EXISTS jobs (
+  id VARCHAR(255) PRIMARY KEY,
+  command TEXT NOT NULL,
+  state VARCHAR(50) NOT NULL,
+  attempts INT NOT NULL DEFAULT 0,
+  max_retries INT NOT NULL DEFAULT 3,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  next_try_at DATETIME NULL,
+  worker_id VARCHAR(255),
+  exit_code INT,
+  stdout LONGTEXT,
+  stderr LONGTEXT,
+  processing_expires_at DATETIME NULL
+);
+
+---
+
+## Libraries & Build System
+
+**Build:** Maven (`pom.xml` configured to shade dependencies into a single executable JAR).
+
+### 🧩 Main Libraries
+
+- **[picocli](https://picocli.info/)** — CLI framework (subcommands, argument parsing)
+- **[HikariCP](https://github.com/brettwooldridge/HikariCP)** — JDBC connection pool
+- **[mysql-connector-java](https://dev.mysql.com/downloads/connector/j/)** — MySQL driver
+- **[jackson-databind](https://github.com/FasterXML/jackson)** — JSON → Job POJO parsing
+- **[slf4j-api](https://www.slf4j.org/)** and **[slf4j-simple](https://www.slf4j.org/manual.html)** — lightweight logging abstraction
+- *(Optional)* `protobuf-java` — included as a transitive dependency; not used in the core flow
+
+---
+
+### ⚙️ Packaging
+
+The **`maven-shade-plugin`** packages everything into a single runnable JAR:
+
+```bash
+target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar
+
+org.slf4j:slf4j-api:2.0.7  
+org.slf4j:slf4j-simple:2.0.7  
+com.zaxxer:HikariCP:5.0.1  
+com.fasterxml.jackson.core:jackson-databind:2.17.1  
+com.mysql:mysql-connector-j:8.0.33  
+info.picocli:picocli:4.7.5  
+
+---
+
+## Configuration (`application.properties`)
+
+This section defines the configuration file required by **queuectl** for both local and cloud database connections.  
+All properties are placed in:
+
+src/main/resources/application.properties
+
+yaml
+Copy code
+
+---
+
+### 🛢️ Local Setup
+
+For local testing or development using a MySQL instance running on `127.0.0.1:3306`, use the following configuration:
+
+```properties
+# =========================
+# Database Configuration
+# =========================
+db.url=jdbc:mysql://127.0.0.1:3306/queuecli?serverTimezone=UTC&useLegacyDatetimeCode=false&useSSL=false
+db.user=root
+db.password=yourpassword
+db.pool.size=10
+
+# =========================
+# Queue Defaults
+# =========================
+queue.max_retries=3
+queue.backoff_base=2
+queue.lease_seconds=60
+Explanation:
+
+db.url — JDBC URL to connect to your MySQL database.
+
+db.user and db.password — Credentials for your local DB user.
+
+db.pool.size — Size of the HikariCP connection pool.
+
+queue.max_retries — Maximum number of retry attempts for failed jobs.
+
+queue.backoff_base — Base multiplier used in exponential retry delay (2^attempts).
+
+queue.lease_seconds — Duration (in seconds) for which a worker holds a job lease.
+
+☁️ Aiven Example (if using Aiven MySQL)
+If you’re deploying or testing on Aiven Cloud MySQL, SSL and certificate verification are required.
+Replace placeholder values accordingly:
+
+properties
+Copy code
+# =========================
+# Aiven Cloud Database Configuration
+# =========================
+db.url=jdbc:mysql://mysql-xxxx-...-aivencloud.com:24220/queuecli?serverTimezone=UTC&useLegacyDatetimeCode=false&ssl-mode=VERIFY_CA&ssl-ca=C:/path/to/ca.pem
+db.user=avnadmin
+db.password=yourpassword
+db.pool.size=10
+
+Notes:
+
+Use ssl-mode=VERIFY_CA to enforce secure SSL verification.
+
+Replace the CA certificate path (ssl-ca=...) with the actual path on your system.
+
+The same queue configuration from the local setup can be used here.
+
+Ensure you don’t disable SSL verification in production for security reasons.
