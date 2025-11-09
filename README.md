@@ -417,5 +417,13 @@ bad1 should move back to pending and reset attempts=0
 - [x] **No dependency conflicts or logging errors** appear in console output
 
 ---
+---
+
+## 📚 References & Acknowledgements
+
+Detailed references for concepts, libraries, and documentation used in this project can be found here:  
+➡️ [View Full References and Acknowledgements](https://github.com/nalankrishnav/queuectlnk/blob/master/REFERENCES.md)
+
+---
 
 All design decisions, architecture, and implementation logic (CLI structure, worker pool, retry and DLQ handling, and MySQL integration) were **independently implemented** by **Nalan Krishna V** based on the assignment specifications.
