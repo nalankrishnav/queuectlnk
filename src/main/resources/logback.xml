@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <!-- reduce default logging noise -->
+  <property name="LOG_LEVEL" value="ERROR"/>
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <root level="${LOG_LEVEL}">
+    <appender-ref ref="STDOUT" />
+  </root>
+
+  <!-- Lower (or silence) very noisy libraries explicitly if desired -->
+  <logger name="com.zaxxer.hikari" level="WARN"/>
+  <logger name="org.apache" level="WARN"/>
+  <logger name="org.hibernate" level="WARN"/>
+  <logger name="org.springframework" level="WARN"/>
+
+</configuration>
