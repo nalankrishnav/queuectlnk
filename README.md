@@ -193,3 +193,54 @@ Use ssl-mode=VERIFY_CA to enforce secure SSL verification.
 Replace the CA certificate path (ssl-ca=...) with the actual path on your system.
 The same queue configuration from the local setup can be used here.
 Ensure you don’t disable SSL verification in production for security reasons.
+
+### Build (single runnable JAR) & run (examples)
+# Build
+From project root:
+```
+mvn clean package
+```
+##### output: target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar
+
+Run (general)
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar --help
+```
+
+#### Enqueue examples
+
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar enqueue {"id":"job1","command":"echo hello","maxRetries":3}
+```
+#### Start worker(s)
+
+##### Start 1 worker:
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar worker --count 1
+```
+
+##### Start 3 workers:
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar worker --count 3
+```
+#### List jobs by state
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar list --state pending
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar list --state processing
+```
+#### DLQ commands
+
+##### List DLQ:
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq list
+```
+
+#### Retry dead job (moves to pending and attempts=0):
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq retry <jobId>
+```
+#### Status
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar status
+```
+---
