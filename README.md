@@ -417,36 +417,5 @@ bad1 should move back to pending and reset attempts=0
 - [x] **No dependency conflicts or logging errors** appear in console output
 
 ---
----
-
-## References & Acknowledgements
-
-This project, **QueueCTL**, was implemented independently as part of a backend developer internship assignment.  
-The following materials and libraries were referenced for understanding concepts, syntax, and architecture:
-
-### 📚 Documentation and Frameworks
-- **Picocli** (CLI framework) — Official documentation: [https://picocli.info/](https://picocli.info/)
-- **HikariCP** (Connection Pool) — Official GitHub: [https://github.com/brettwooldridge/HikariCP](https://github.com/brettwooldridge/HikariCP)
-- **SLF4J** (Logging) — [https://www.slf4j.org/](https://www.slf4j.org/)
-- **Jackson Databind** (JSON parsing) — [https://github.com/FasterXML/jackson](https://github.com/FasterXML/jackson)
-- **MySQL JDBC Driver** — Oracle documentation: [https://dev.mysql.com/doc/connector-j/8.0/en/](https://dev.mysql.com/doc/connector-j/8.0/en/)
-- **Maven Shade Plugin** — [https://maven.apache.org/plugins/maven-shade-plugin/](https://maven.apache.org/plugins/maven-shade-plugin/)
-
-### 💡 Conceptual References
-- *Database transaction locking & “SELECT … FOR UPDATE SKIP LOCKED” patterns* — MySQL documentation and blog discussions.
-- *Exponential Backoff and Dead Letter Queues* — Common message queue design patterns (similar to RabbitMQ / Celery concepts).
-- *Time Zone handling in MySQL and JDBC* — Articles from Baeldung and MySQL official docs.
-
-### 🧠 Tools and Cloud Services
-- **Aiven Cloud MySQL** — for hosting and testing cloud DB connections.
-- **GitHub** — version control, issues, and commit history.
-- **Eclipse IDE** — code development environment.
-- **Vercel (explored)** — for potential cloud deployment testing.
-
-### 🙏 Acknowledgements
-Special thanks to:
-- Java and open-source community documentation,
-- Stack Overflow discussions for minor troubleshooting of JDBC and SLF4J issues,
-- Friends and mentors who guided in debugging and best practices.
 
 All design decisions, architecture, and implementation logic (CLI structure, worker pool, retry and DLQ handling, and MySQL integration) were **independently implemented** by **Nalan Krishna V** based on the assignment specifications.
