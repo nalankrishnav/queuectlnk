@@ -39,7 +39,7 @@ The project uses an `application.properties` file for **DB and queue configurati
   - `list`: list jobs by state
   - `dlq`: list DLQ jobs or retry them using `dlq retry <jobId>` (moves dead → pending)
   - `status`: show counts by state and worker summary
-- **Persistence:** MySQL (schema provided)
+- **Persistence:** MySQL (schema provided) cloud-based database — **Aiven MySQL**
 - **Retry/Backoff:** `delaySeconds = Math.pow(backoffBase, attempts)` seconds
 - **Lease Handling:** claimed job sets `processing_expires_at = NOW() + leaseSeconds`  
   → used to detect stuck workers and allow reclaims after lease expiry
