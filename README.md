@@ -8,7 +8,7 @@
 6. [Configuration (application.properties)](#configuration-applicationproperties)
 7. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
 8. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
-9. [Tests & Verification Steps to Run Before Submission](#tests--verification-steps-to-run-before-submission)
+9. [Tests & Verification Steps](#tests--verification-steps-to-run-before-submission)
 
 
 ## Quick Summary & Status
@@ -327,7 +327,7 @@ java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq retry bad1
 
 ---
 
-## Tests & Verification Steps to Run Before Submission
+## Tests & Verification Steps 
 
 Follow these steps to confirm that `queuectl` is functioning correctly before final submission or deployment.
 
@@ -403,9 +403,8 @@ java -jar target/...shaded.jar dlq retry bad1
 
 bad1 should move back to pending and reset attempts=0
 
-### 🧾 7. Final Verification Checklist
+### 🧾 6. Final Verification Checklist
 
-Before submission, ensure all the following checks pass:
 
 - [x] **JAR builds successfully** without warnings (`mvn clean package`)
 - [x] **CLI commands** (`enqueue`, `worker`, `list`, `dlq`, `status`) execute correctly
