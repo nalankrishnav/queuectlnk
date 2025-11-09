@@ -178,9 +178,9 @@ If you’re deploying or testing on Aiven Cloud MySQL, SSL and certificate verif
 Replace placeholder values accordingly:
 
 
-#### =========================
+
 #### Aiven Cloud Database Configuration
-#### =========================
+
 db.url=jdbc:mysql://mysql-xxxx-...-aivencloud.com:24220/queuecli?serverTimezone=UTC&useLegacyDatetimeCode=false&ssl-mode=VERIFY_CA&ssl-ca=C:/path/to/ca.pem
 
 db.user=avnadmin
