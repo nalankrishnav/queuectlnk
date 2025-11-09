@@ -6,6 +6,9 @@ import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Properties;
 
 public class DatabaseUtil {
@@ -34,6 +37,22 @@ public class DatabaseUtil {
             cfg.setAutoCommit(false);
             cfg.setPoolName("queuectl-pool");
 
+            // --- NEW: set DB session time_zone to match JVM system offset ---
+            // Example offset values: "+05:30", "+00:00"
+            try {
+                ZoneId zid = ZoneId.systemDefault();
+                ZoneOffset zoff = zid.getRules().getOffset(Instant.now());
+                String offsetId = zoff.getId(); // e.g. "+05:30" or "Z"
+                if ("Z".equals(offsetId)) offsetId = "+00:00";
+                // Use connection init SQL so each new connection sets the session time zone
+                cfg.setConnectionInitSql("SET time_zone = '" + offsetId + "'");
+                System.out.println("DEBUG: setting DB session time_zone = " + offsetId + " (JVM zone=" + zid + ")");
+            } catch (Exception ex) {
+                System.err.println("WARN: failed to set DB session time_zone: " + ex.getMessage());
+                // continue without failing startup
+            }
+            // --- end new ---
+
             ds = new HikariDataSource(cfg);
 
             // --- DEBUG: print the actual DB/catalog and user this app connected to ---
@@ -47,13 +66,12 @@ public class DatabaseUtil {
                 }
             } catch (Exception ex) {
                 System.err.println("DEBUG: failed to query DB info: " + ex.getMessage());
-                // don't throw — debug should not break startup
+                // don't throw — debug should not break startup ohh
             }
             // --- end debug ---
         }
         return ds;
     }
-
 
     public static synchronized void close() {
         if (ds != null) {
