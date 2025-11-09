@@ -242,7 +242,7 @@ java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar status
 ```
 ---
 
-## Full CLI Reference (Commands, Flags, Example Usage)
+## Full CLI Reference (Commands, Flags, Examples)
 
 Below is the complete list of available `queuectl` commands, their descriptions, and example usages.
 
