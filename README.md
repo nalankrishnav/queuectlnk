@@ -9,6 +9,8 @@
 7. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
 8. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
 9. [Tests & Verification Steps](#tests--verification-steps)
+10. [References & Acknowledgements](#references--acknowledgments)
+
 
 
 ## Quick Summary & Status
