@@ -182,8 +182,11 @@ Replace placeholder values accordingly:
 #### Aiven Cloud Database Configuration
 #### =========================
 db.url=jdbc:mysql://mysql-xxxx-...-aivencloud.com:24220/queuecli?serverTimezone=UTC&useLegacyDatetimeCode=false&ssl-mode=VERIFY_CA&ssl-ca=C:/path/to/ca.pem
+
 db.user=avnadmin
+
 db.password=yourpassword
+
 db.pool.size=10
 
 ## Notes:
