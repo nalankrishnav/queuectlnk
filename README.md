@@ -8,13 +8,8 @@
 6. [Configuration (application.properties)](#configuration-applicationproperties)
 7. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
 8. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
-9. [Examples with Expected Console Output and DB Rows (Walkthrough)](#examples-with-expected-console-output-and-db-rows-walkthrough)
-10. [Timezones & Timestamps — Important Notes and Recommended Setup](#timezones--timestamps--important-notes-and-recommended-setup)
-11. [Behavior Details: State Transitions, Retries, DLQ](#behavior-details-state-transitions-retries-dlq)
-12. [Deployment Notes (Aiven MySQL, Cloud Hosting, JAR Deployment)](#deployment-notes-aiven-mysql-cloud-hosting-jar-deployment)
-13. [Troubleshooting & Common Errors + Fixes](#troubleshooting--common-errors--fixes)
-14. [Tests & Verification Steps to Run Before Submission](#tests--verification-steps-to-run-before-submission)
-15. [Next Steps / Optional Improvements (Bonus Features)](#next-steps--optional-improvements-bonus-features)
+9. [Tests & Verification Steps to Run Before Submission](#tests--verification-steps-to-run-before-submission)
+
 
 ## Quick Summary & Status
 
