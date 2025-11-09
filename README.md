@@ -271,3 +271,152 @@ Below is the complete list of available `queuectl` commands, their descriptions,
   java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar enqueue --help
 
 ---
+## Examples with Expected Console Output and DB Rows (Walkthrough)
+
+---
+
+#### 1️⃣ Enqueue Job
+
+**Command:**
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar enqueue '{"id":"job1","command":"echo hello","maxRetries":3}'
+```
+Console Output:
+```
+✅ Job saved: job1
+Enqueued job: job1
+```
+
+#### 2️⃣ Start Worker
+**Command:**
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar worker --count 1
+```
+
+Console Example:
+```
+🚀 Starting 1 worker(s)
+✅ Started worker-abc123
+findAndClaimNext: claimed id=job1 updatedRows=1
+worker-abc123 → Processing job job1 (echo hello)
+markCompleted: rows=1 id=job1
+✅ Completed job job1
+```
+
+### 3️⃣ Failed Job → Retry → DLQ
+
+**Enqueue Failing Job:**
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar enqueue '{"id":"bad1","command":"slep 2","maxRetries":2}'
+```
+
+Worker executes invalid command (slep instead of sleep).
+
+ProcessBuilder exits non-zero → job marked for retry.
+
+After exceeding maxRetries, job transitions to state='dead'.
+
+**Console:**
+```
+❌ Command failed: slep 2
+Retrying in 2s...
+Retrying in 4s...
+💀 Job moved to DLQ: bad1
+```
+
+**DLQ Recovery Example:**
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq list
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq retry bad1
+```
+
+---
+
+## ✅ Tests & Verification Steps to Run Before Submission
+
+Follow these steps to confirm that `queuectl` is functioning correctly before final submission or deployment.
+
+---
+
+#### 🧱 1. Build the JAR
+
+From the project root:
+
+```
+mvn clean package
+```
+This produces:
+```
+target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar
+```
+#### 2. Prepare the Database
+
+**Create the database:**
+```
+CREATE DATABASE queuecli;
+USE queuecli;
+```
+
+**Run the schema:**
+```
+mysql -u root -p queuecli < schema.sql
+```
+
+Ensure the jobs table is created successfully.
+
+#### 3. Enqueue a Test Job
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar enqueue '{"id":"test1","command":"echo hello","maxRetries":3}'
+```
+
+**Expected Console Output:**
+```
+✅ Job saved: test1
+Enqueued job: test1
+```
+#### 4. Start a Worker
+```
+java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar worker --count 1
+```
+
+**Expected:**
+```
+Console logs show the job being processed and completed.
+
+DB row test1 → state='completed' and stdout='hello\n'.
+```
+#### 5. Verify Retry & DLQ Flow
+
+Enqueue an invalid job:
+```
+java -jar target/...shaded.jar enqueue '{"id":"bad1","command":"invalidcmd","maxRetries":2}'
+```
+
+**Watch the worker retries and eventual DLQ move:**
+```
+❌ Command failed: invalidcmd
+Retrying in 2s...
+Retrying in 4s...
+💀 Job moved to DLQ: bad1
+```
+
+**Verify DLQ and recovery:**
+```
+java -jar target/...shaded.jar dlq list
+java -jar target/...shaded.jar dlq retry bad1
+```
+
+bad1 should move back to pending and reset attempts=0
+
+### 🧾 7. Final Verification Checklist
+
+Before submission, ensure all the following checks pass:
+
+- [x] **JAR builds successfully** without warnings (`mvn clean package`)
+- [x] **CLI commands** (`enqueue`, `worker`, `list`, `dlq`, `status`) execute correctly
+- [x] **Completed job output** verified in MySQL database (`state='completed'`, correct `stdout`)
+- [x] **Retry → DLQ → Retry-back flow** confirmed works as expected
+- [x] **Timestamps** (`next_try_at`, `processing_expires_at`) are consistent between DB and JVM
+- [x] **No dependency conflicts or logging errors** appear in console output
+
+---
