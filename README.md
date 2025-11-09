@@ -27,7 +27,7 @@ You can run it locally by building a **shaded JAR** and executing CLI commands l
 
 The project uses an `application.properties` file for **DB and queue configuration**.
 
-####It is backed by a cloud-based database — Aiven MySQL — ensuring secure, reliable, and scalable job persistence.
+#### It is backed by a cloud-based database — Aiven MySQL — ensuring secure, reliable, and scalable job persistence.
 ---
 
 ## What This Implements (Feature List)
