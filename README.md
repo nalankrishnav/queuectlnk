@@ -327,7 +327,7 @@ java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq retry bad1
 
 ---
 
-## Tests & Verification Steps 
+## Tests & Verification Steps
 
 Follow these steps to confirm that `queuectl` is functioning correctly before final submission or deployment.
 
