@@ -246,3 +246,28 @@ java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar dlq retry <jobId>
 java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar status
 ```
 ---
+
+## Full CLI Reference (Commands, Flags, Example Usage)
+
+Below is the complete list of available `queuectl` commands, their descriptions, and example usages.
+
+| **Command** | **Description** | **Example Usage** |
+|--------------|----------------|-------------------|
+| `enqueue` | Add a new job. Accepts JSON, friendly unquoted syntax, or `@file` for file input. | `enqueue '{"id":"job1","command":"sleep 2"}'` |
+| `worker --count N` | Start **N** worker threads to process jobs concurrently. | `worker --count 2` |
+| `list --state <state>` | List jobs by state (`pending`, `processing`, `completed`, or `dead`). | `list --state pending` |
+| `dlq list` | Show jobs currently in the **Dead Letter Queue (DLQ)**. | `dlq list` |
+| `dlq retry <id>` | Move a job from **dead → pending** and reset `attempts=0`. | `dlq retry job-1234` |
+| `status` | Display job counts by state and information about active workers. | `status` |
+
+---
+
+### 🧠 Notes
+
+- Commands are **case-insensitive** and accept short or long flags (e.g., `--count` or `-c` if implemented).  
+- The CLI automatically connects to the configured database (`application.properties`) to manage job persistence.  
+- Use `--help` after any command to view its options, e.g.:
+  ```bash
+  java -jar target/queuectlnk-0.0.1-SNAPSHOT-shaded.jar enqueue --help
+
+---
