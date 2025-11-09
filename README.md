@@ -1,31 +1,17 @@
-Table of contents
+# Table of Contents
 
-Quick summary & status
-
-What this implements (feature list)
-
-Architecture / Dataflow (short)
-
-Schema (SQL) — copy/paste ready
-
-Libraries & build system
-
-Configuration (application.properties)
-
-Build (single runnable JAR) & run (examples)
-
-Full CLI reference (commands, flags, examples)
-
-Examples with expected console output and DB rows (walkthrough)
-
-Timezones & timestamps — important notes and recommended setup
-
-Behavior details: state transitions, retries, DLQ
-
-Deployment notes (Aiven MySQL, cloud hosting, jar deployment)
-
-Troubleshooting & common errors + fixes
-
-Tests & verification steps to run before submission
-
-Next steps / optional improvements (bonus features)
+1. [Quick Summary & Status](#quick-summary--status)
+2. [What This Implements (Feature List)](#what-this-implements-feature-list)
+3. [Architecture / Dataflow (Short)](#architecture--dataflow-short)
+4. [Schema (SQL) — Copy/Paste Ready](#schema-sql--copypaste-ready)
+5. [Libraries & Build System](#libraries--build-system)
+6. [Configuration (application.properties)](#configuration-applicationproperties)
+7. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
+8. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
+9. [Examples with Expected Console Output and DB Rows (Walkthrough)](#examples-with-expected-console-output-and-db-rows-walkthrough)
+10. [Timezones & Timestamps — Important Notes and Recommended Setup](#timezones--timestamps--important-notes-and-recommended-setup)
+11. [Behavior Details: State Transitions, Retries, DLQ](#behavior-details-state-transitions-retries-dlq)
+12. [Deployment Notes (Aiven MySQL, Cloud Hosting, JAR Deployment)](#deployment-notes-aiven-mysql-cloud-hosting-jar-deployment)
+13. [Troubleshooting & Common Errors + Fixes](#troubleshooting--common-errors--fixes)
+14. [Tests & Verification Steps to Run Before Submission](#tests--verification-steps-to-run-before-submission)
+15. [Next Steps / Optional Improvements (Bonus Features)](#next-steps--optional-improvements-bonus-features)
