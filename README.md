@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS jobs (
   stderr LONGTEXT,
   processing_expires_at DATETIME NULL
 );
-
+```
 ---
 
 ## Libraries & Build System
