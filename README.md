@@ -1,15 +1,16 @@
 # Table of Contents
 
 1. [Quick Summary & Status](#quick-summary--status)
-2. [What This Implements (Feature List)](#what-this-implements-feature-list)
-3. [Architecture / Dataflow (Short)](#architecture--dataflow-short)
-4. [Schema (SQL) — Copy/Paste Ready](#schema-sql--copypaste-ready)
-5. [Libraries & Build System](#libraries--build-system)
-6. [Configuration (application.properties)](#configuration-applicationproperties)
-7. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
-8. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
-9. [Tests & Verification Steps](#tests--verification-steps)
-10. [References & Acknowledgements](#-references--acknowledgements)
+2. [🎥 Demo Video](#-demo-video-google-drive-link)
+3. [What This Implements (Feature List)](#what-this-implements-feature-list)
+4. [Architecture / Dataflow (Short)](#architecture--dataflow-short)
+5. [Schema (SQL) — Copy/Paste Ready](#schema-sql--copypaste-ready)
+6. [Libraries & Build System](#libraries--build-system)
+7. [Configuration (application.properties)](#configuration-applicationproperties)
+8. [Build (Single Runnable JAR) & Run (Examples)](#build-single-runnable-jar--run-examples)
+9. [Full CLI Reference (Commands, Flags, Examples)](#full-cli-reference-commands-flags-examples)
+10. [Tests & Verification Steps](#tests--verification-steps)
+11. [References & Acknowledgements](#-references--acknowledgements)
 
 
 
@@ -31,7 +32,10 @@ The project uses an `application.properties` file for **DB and queue configurati
 
 #### It is backed by a cloud-based database — Aiven MySQL — ensuring secure, reliable, and scalable job persistence.
 ---
+## 🎥 Demo Video (Google Drive Link)
 
+👉 [Watch the Demo Video on Google Drive](https://drive.google.com/file/d/1yh1_Y9sdgNKOr-1a0KIY_rpz43lsKRni/view?usp=sharing)
+---
 ## What This Implements (Feature List)
 
 - **CLI Entrypoint:** `queuectl` (via [picocli](https://picocli.info/))
