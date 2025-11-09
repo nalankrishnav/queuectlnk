@@ -49,6 +49,8 @@ The project uses an `application.properties` file for **DB and queue configurati
 
 ## Architecture / Dataflow (Short)
 
+<img width="2076" height="1086" alt="image" src="https://github.com/user-attachments/assets/ce21c677-00ea-4865-9e4c-a08df42ca55e" />
+
 1. **enqueue** — inserts a job row  
    - `state='pending'`, `attempts=0`, `next_try_at=NULL` (or `NOW()` as needed)
 
