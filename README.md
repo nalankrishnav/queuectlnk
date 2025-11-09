@@ -124,9 +124,9 @@ com.zaxxer:HikariCP:5.0.1
 com.fasterxml.jackson.core:jackson-databind:2.17.1  
 com.mysql:mysql-connector-j:8.0.33  
 info.picocli:picocli:4.7.5  
-
----
 ```
+---
+
 ## Configuration (`application.properties`)
 
 This section defines the configuration file required by **queuectl** for both local and cloud database connections.  
